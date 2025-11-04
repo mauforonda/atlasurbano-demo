@@ -30,20 +30,20 @@ jobs:
         pip install geopandas pyarrow
 
     - name: preparar mapa
-        run: |
-          mkdir -p temporal
-          ./preparar_mapa.py
+      run: |
+        mkdir -p temporal
+        ./preparar_mapa.py
 
     - name: crear pmtiles
-        run: |
-          tippecanoe -Z8 -z14 \
-            --no-line-simplification \
-            --no-simplification-of-shared-nodes \
-            --no-tiny-polygon-reduction \
-            --detect-shared-borders \
-            --maximum-tile-bytes=1500000 \
-            -f -o vista/src/atlas.pmtiles \
-            temporal/manzanos.geojson
+      run: |
+        tippecanoe -Z8 -z14 \
+          --no-line-simplification \
+          --no-simplification-of-shared-nodes \
+          --no-tiny-polygon-reduction \
+          --detect-shared-borders \
+          --maximum-tile-bytes=1500000 \
+          -f -o vista/src/atlas.pmtiles \
+          temporal/manzanos.geojson
     
     - name: setup docs
       run: |
