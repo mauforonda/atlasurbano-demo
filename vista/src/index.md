@@ -48,19 +48,21 @@ maplibregl.addProtocol("pmtiles", protocol.tile);
 
 ```js
 // Cargar el pmtiles
-const tiles = FileAttachment("./atlas.pmtiles");
-const pm = new PMTiles(tiles.href);
+const pmtiles_url = `${gh}atlas.pmtiles`
+const pm = new PMTiles(pmtiles_url);
 protocol.add(pm);
 ```
 
 ```js
 // Definiciones de campos y ciudades
-const campos = await FileAttachment("campos.json").json();
-const ciudades = await FileAttachment("ciudades.json").json();
+const campos = await d3.json(`${gh}campos.json`);
+const ciudades = await d3.json(`${gh}ciudades.json`);
 ```
 
 ```js
 // Cargar componentes en otros js y definir constantes
+const gh =
+  "https://raw.githubusercontent.com/mauforonda/atlasurbano/refs/heads/main/tiles/";
 const invalido = "rgba(180, 180, 199, 0.36)";
 import { indice } from "./components/capas.js";
 import { autoSelect } from "./components/inputs.js";
@@ -284,7 +286,7 @@ const ready = new Promise((resolve) => {
     if (!map.getSource("atlas")) {
       map.addSource("atlas", {
         type: "vector",
-        url: `pmtiles://${tiles.href}`,
+        url: `pmtiles://${pmtiles_url}`,
         minzoom: 8,
         maxzoom: 14,
       });

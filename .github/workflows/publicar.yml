@@ -13,39 +13,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Install Tippecanoe
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y tippecanoe
-
-    - name: setup python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-        cache: 'pip'
-        cache-dependency-path: './vista/requirements.txt'
-
-    - name: python install
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r vista/requirements.txt
-
-    - name: preparar mapa
-      run: |
-        mkdir -p temporal
-        ./preparar_mapa.py
-
-    - name: crear pmtiles
-      run: |
-        tippecanoe -Z8 -z14 \
-          --no-line-simplification \
-          --no-simplification-of-shared-nodes \
-          --no-tiny-polygon-reduction \
-          --detect-shared-borders \
-          --maximum-tile-bytes=1500000 \
-          -f -o vista/src/atlas.pmtiles \
-          temporal/manzanos.geojson
-    
     - name: setup docs
       run: |
         mkdir -p docs
