@@ -1,0 +1,4 @@
+**/.ipynb_checkpoints
+temporal/
+**/vista/src/*.json
+**/vista/src/*.pmtiles

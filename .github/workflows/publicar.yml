@@ -1,0 +1,77 @@
+name: Publicar
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: publicar
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install Tippecanoe
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y tippecanoe
+
+    - name: setup python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: python install
+      run: |
+        python -m pip install --upgrade pip
+        pip install geopandas pyarrow
+
+    - name: preparar mapa
+        run: |
+          mkdir -p temporal
+          ./preparar_mapa.py
+
+    - name: crear pmtiles
+        run: |
+          tippecanoe -Z8 -z14 \
+            --no-line-simplification \
+            --no-simplification-of-shared-nodes \
+            --no-tiny-polygon-reduction \
+            --detect-shared-borders \
+            --maximum-tile-bytes=1500000 \
+            -f -o vista/src/atlas.pmtiles \
+            temporal/manzanos.geojson
+    
+    - name: setup docs
+      run: |
+        mkdir -p docs
+
+    - name: setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: "npm"
+        cache-dependency-path: ./vista/package-lock.json
+
+    - name: dependencias
+      working-directory: ./vista
+      run: npm ci
+
+    - name: build
+      working-directory: ./vista
+      run: npm run build
+
+    - name: ensure .nojekyll
+      run: touch ./docs/.nojekyll
+
+    - name: publicar
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        force_orphan: true
+        user_name: atlasurbano_bot
+        user_email: atlasurbano_bot@example.com
