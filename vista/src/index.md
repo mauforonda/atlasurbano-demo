@@ -66,7 +66,7 @@ const ciudades = await d3.json(`${gh}ciudades.json`);
 ```js
 // Cargar componentes en otros js y definir constantes
 const gh =
-  "https://raw.githubusercontent.com/mauforonda/atlasurbano/refs/heads/main/tiles/";
+  "https://raw.githubusercontent.com/mauforonda/atlasurbano-demo/refs/heads/main/tiles/";
 const invalido = "rgba(180, 180, 199, 0.36)";
 import { indice } from "./components/capas.js";
 import { autoSelect } from "./components/inputs.js";
