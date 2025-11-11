@@ -41,5 +41,5 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
         force_orphan: true
-        user_name: atlasurbano_bot
-        user_email: atlasurbano_bot@example.com
+        user_name: atlasurbanodemo_bot
+        user_email: atlasurbanodemo_bot@example.com

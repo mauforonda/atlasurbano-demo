@@ -66,7 +66,7 @@ def save_geojson(gdf, out_path, indice_path, as_int):
         for c in abreviaciones:
             v = rowd[c]
             if v == v:
-                props[c] = round(float(v), 0 if c in como_enteros else 2)
+                props[c] = round(float(v), 0 if c in como_enteros else 3)
         features.append(
             {"type": "Feature", "geometry": mapping(geom), "properties": props}
         )
@@ -129,6 +129,16 @@ f["ocupados_empleados"] = filterSum(f, "^ocupacion_empleado.*") / f.poblacion_oc
 f["ocupados_cuentapropistas"] = (
     filterSum(f, "^ocupacion_cuentapropia.*") / f.poblacion_ocupada
 )
+
+f["seguro_privado"] = (
+    filterSum(f, "^saludafiliacion_seguroprivado.*") / f.poblacion_residente_pais
+)
+# f["seguro_caja"] = (
+#     filterSum(f, "^saludafiliacion_cajadesalud.*") / f.poblacion_residente_pais
+# )
+
+# f["salud_privado"] = filterSum(f, "^salud_centroprivado.*") / f.poblacion_total
+# f["salud_caja"] = filterSum(f, "^salud_cajadesalud.*") / f.poblacion_total
 
 # Actividades económicas
 # Porcentaje de personas dedicadas a cada actividad económica entre el total de personas ocupadas
@@ -202,6 +212,7 @@ consolidado = (
                 "poblacion_alojamientoycomida",
                 "poblacion_enseñanza",
                 "poblacion_saludyasistencia",
+                "seguro_privado",
                 "viviendas_desocupadas",
                 "viviendas_alquiladas_anticretico",
                 "viviendas_energiaelectrica_serviciopublico",

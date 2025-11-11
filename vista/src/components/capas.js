@@ -1,4 +1,28 @@
-export const indice = ({
+export const indice = {
+  educacion_superior: {
+    colormap: [
+      [0.1, "#f0f9e8"],
+      [0.25, "#92cebc"],
+      [0.4, "#00a0b5"],
+      [0.55, "#006bb4"],
+      [0.7, "#25278b"],
+    ],
+    nombre: "Porcentaje que terminó la educación superior",
+    ayuda: "porcentaje que terminó la educación superior",
+    format: ".0%",
+  },
+  seguro_privado: {
+    colormap: [
+      [0.0, "#ddd8e9"],
+      [0.03, "#acc6e7"],
+      [0.06, "#5eb9d5"],
+      [0.09, "#00aaa6"],
+      [0.12, "#14955e"],
+    ],
+    nombre: "Porcentaje con seguro de salud privado",
+    ayuda: "porcentaje de residentes nacionales con seguro de salud privado",
+    format: ".0%",
+  },
   personas: {
     colormap: [
       [0, "#feebe2"],
@@ -70,18 +94,6 @@ export const indice = ({
     nombre: "Índice de masculinidad",
     ayuda: "número de hombres por 100 mujeres",
     format: ".0f",
-  },
-  educacion_superior: {
-    colormap: [
-      [0.1, "#f0f9e8"],
-      [0.2, "#bae4bc"],
-      [0.3, "#7bccc4"],
-      [0.4, "#43a2ca"],
-      [0.5, "#0868ac"],
-    ],
-    nombre: "Porcentaje que terminó la educación superior",
-    ayuda: "porcentaje que terminó la educación superior",
-    format: ".0%",
   },
   poblacion_migrante: {
     colormap: [
@@ -299,4 +311,4 @@ export const indice = ({
     ayuda: "porcentaje de viviendas particulares con internet fijo o móvil",
     format: ".0%",
   },
-});
+};

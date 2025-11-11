@@ -48,6 +48,8 @@ maplibregl.addProtocol("pmtiles", protocol.tile);
 
 ```js
 // Cargar el pmtiles
+// const tiles = FileAttachment("./tiles/atlas.pmtiles");
+// const pmtiles_url = tiles.href;
 const pmtiles_url = `${gh}atlas.pmtiles`
 const pm = new PMTiles(pmtiles_url);
 protocol.add(pm);
@@ -57,6 +59,8 @@ protocol.add(pm);
 // Definiciones de campos y ciudades
 const campos = await d3.json(`${gh}campos.json`);
 const ciudades = await d3.json(`${gh}ciudades.json`);
+// const campos = await FileAttachment("./tiles/campos.json").json();
+// const ciudades = await FileAttachment("./tiles/ciudades.json").json();
 ```
 
 ```js
